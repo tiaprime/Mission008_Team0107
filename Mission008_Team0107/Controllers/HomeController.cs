@@ -6,27 +6,52 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
+        private NewTaskContext _context;
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpGet]
+        public IActionResult AddTask()
         {
-            return View();
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+            return View("AddTask", new NewTask());
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult AddTask(NewTask response)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            _context.Tasks.Add(response);
+            _context.SaveChanges();
+
+            return View("Confirmation", response);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Tasks
+                .Single(x => x.TaskId == id);
+
+            ViewBag.Categories = _context.Categories
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+            return View("AddTask", recordToEdit);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(NewTask updatedInfo)
+        {
+            _context.Update(updatedInfo);
+            _context.SaveChanges();
+
+            return RedirectToAction("QuadrantView");
+        }
+
     }
 }
