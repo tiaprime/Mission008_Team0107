@@ -12,7 +12,5 @@ namespace Mission008_Team0107.Controllers
         {
             return View();
         }
-
-  
     }
 }
