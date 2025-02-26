@@ -6,7 +6,12 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
-        
+        private ITaskRepository _repo;
+
+        public HomeController(ITaskRepository temp)
+        {
+            _repo = temp;
+        }
 
         public IActionResult Index()
         {
