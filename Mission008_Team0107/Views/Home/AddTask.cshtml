@@ -14,7 +14,7 @@
     <input asp-for="DueDate"><br>
 
     <select asp-for="QuadrantId" required>
-        <option value="">Select a Category</option>
+        <option value="">Select a Quadrant</option>
         @foreach (Quadrant m in ViewBag.Quadrants)
         {
             <option value="@m.QuadrantId">@m.QuadrantName</option>
@@ -40,3 +40,5 @@
 
     <button type="submit">Submit Task</button>
 </form>
+
+@* <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@x.TaskId">Edit</a></td> *@
