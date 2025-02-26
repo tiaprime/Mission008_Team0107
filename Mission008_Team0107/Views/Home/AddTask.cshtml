@@ -1,0 +1,58 @@
+﻿@using Mission008_Team0107.Models
+@* @* @model NewMovie *@
+
+<h1>Add a New Task</h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="TaskId" />
+
+    <label asp-for="TaskName">Name (required):</label>
+    <input asp-for="TaskName" required><br>
+
+    <label asp-for="DueDate">Due Date:</label>
+    <input asp-for="DueDate"><br>
+
+    @* this wil possibly need to be adjusted *@
+    <label asp-for="QuadrantName">QuandrantName (required):</label>
+    <input asp-for="QuadrantName" required><br>
+
+    <select asp-for="CategoryId" required>
+        <option value="">Select a Category</option>
+        @foreach (Category m in ViewBag.Categories)
+        {
+            <option value="@m.CategoryId">@m.CategoryName</option>
+
+        }
+    </select>
+
+    <label asp-for="Rating">Rating (required):</label>
+    <select asp-for="Rating" required>
+        <option value="G">G</option>
+        <option value="PG">PG</option>
+        <option value="PG-13">PG-13</option>
+        <option value="R">R</option>
+    </select><br>
+
+    <label asp-for="Edited">Edited:</label>
+    <select asp-for="Edited">
+        <option value="" disabled selected></option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+
+    <label asp-for="LentTo">Lent To:</label>
+    <input asp-for="LentTo"><br>
+
+    <label asp-for="CopiedToPlex">CopiedToPlex:</label>
+    <select asp-for="CopiedToPlex">
+        <option value="" disabled selected></option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
+
+    <label asp-for="Notes">Notes (max 25 characters):</label>
+    <input asp-for="Notes" maxlength="25"><br>
+
+    <button type="submit">Submit Movie</button>
+</form>
