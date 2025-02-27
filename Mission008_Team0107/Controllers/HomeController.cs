@@ -6,8 +6,14 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
+        private ITaskRepository _repo;
 
-        private NewTaskContext _repo;
+        public HomeController(ITaskRepository temp)
+        {
+            _repo = temp;
+
+        }
+   
         public IActionResult Index()
         {
             return View();
@@ -22,13 +28,7 @@ namespace Mission008_Team0107.Controllers
 
             return View("AddTask", new NewTask());
 
-        private ITaskRepository _repo;
 
-        public HomeController(ITaskRepository temp)
-        {
-            _repo = temp;
-
-        }
 
         [HttpPost]
         public IActionResult AddTask(NewTask response)
