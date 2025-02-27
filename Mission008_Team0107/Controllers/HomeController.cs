@@ -6,6 +6,7 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
+
         private NewTaskContext _repo;
         public IActionResult Index()
         {
@@ -20,6 +21,13 @@ namespace Mission008_Team0107.Controllers
                 .ToList();
 
             return View("AddTask", new NewTask());
+
+        private ITaskRepository _repo;
+
+        public HomeController(ITaskRepository temp)
+        {
+            _repo = temp;
+
         }
 
         [HttpPost]
@@ -30,6 +38,7 @@ namespace Mission008_Team0107.Controllers
 
             return View("Confirmation", response);
         }
+
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -52,6 +61,7 @@ namespace Mission008_Team0107.Controllers
 
             return RedirectToAction("QuadrantView");
         }
+
 
     }
 }
