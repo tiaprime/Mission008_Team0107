@@ -21,12 +21,7 @@ namespace Mission008_Team0107.Controllers
         }
 
 
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-
+        //CADEN --------------------------------------------------------------
         [HttpGet]
         public IActionResult AddTask()
         {
@@ -40,8 +35,12 @@ namespace Mission008_Team0107.Controllers
         [HttpPost]
         public IActionResult AddTask(NewTask response)
         {
-            _repo.Tasks.Add(response);
-            _repo.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(response);
+            }
+
+
 
             return View("Confirmation", response);
         }
@@ -68,7 +67,7 @@ namespace Mission008_Team0107.Controllers
             return RedirectToAction("QuadrantView");
         }
 
-
+        //CADEN --------------------------------------------------------------
 
 
 
