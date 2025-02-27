@@ -6,7 +6,7 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
-        private NewTaskContext _context;
+        private NewTaskContext _repo;
         public IActionResult Index()
         {
             return View();
@@ -15,7 +15,7 @@ namespace Mission008_Team0107.Controllers
         [HttpGet]
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
@@ -25,8 +25,8 @@ namespace Mission008_Team0107.Controllers
         [HttpPost]
         public IActionResult AddTask(NewTask response)
         {
-            _context.Tasks.Add(response);
-            _context.SaveChanges();
+            _repo.Tasks.Add(response);
+            _repo.SaveChanges();
 
             return View("Confirmation", response);
         }
@@ -34,10 +34,10 @@ namespace Mission008_Team0107.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var recordToEdit = _context.Tasks
+            var recordToEdit = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            ViewBag.Categories = _context.Categories
+            ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
@@ -47,8 +47,8 @@ namespace Mission008_Team0107.Controllers
         [HttpPost]
         public IActionResult Edit(NewTask updatedInfo)
         {
-            _context.Update(updatedInfo);
-            _context.SaveChanges();
+            _repo.Update(updatedInfo);
+            _repo.SaveChanges();
 
             return RedirectToAction("QuadrantView");
         }
