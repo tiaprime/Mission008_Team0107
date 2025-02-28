@@ -52,6 +52,7 @@ namespace Mission008_Team0107.Controllers
             if (ModelState.IsValid)
             {
                 _repo.AddTask(response);
+                
             }
 
 
@@ -86,7 +87,7 @@ namespace Mission008_Team0107.Controllers
             }
             
 
-            return RedirectToAction("QuadrantView");
+            return RedirectToAction("Quadrants");
         }
 
         //DELETE
@@ -105,7 +106,7 @@ namespace Mission008_Team0107.Controllers
         {
             _repo.DeleteTask(record);
             //REturn to QuadrantView after deleting an task
-            return RedirectToAction("QuadrantView");
+            return RedirectToAction("Quadrants");
         }
 
 
