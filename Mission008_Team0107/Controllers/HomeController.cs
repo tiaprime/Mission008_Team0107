@@ -1,6 +1,9 @@
 using System.Diagnostics;   
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission008_Team0107.Models;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Mission008_Team0107.Controllers
 {
@@ -21,19 +24,22 @@ namespace Mission008_Team0107.Controllers
 
 
         //-----------------------------------------------TASK-------------------------------------------------
+        // added Mission008_Team0107.Models because of a douple nameing issure? maybe Task is a special word? 
+
+        //ADD  0-- view tasks
         [HttpGet]
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _repo.Categories
-                .OrderBy(x => x.CategoryName)
+            ViewBag.Tasks = _repo.Tasks
+                .OrderBy(x => x.TaskId)
                 .ToList();
 
-            return View("AddTask", new Task());
+            return View("AddTask", new Mission008_Team0107.Models.Task());
         }
 
 
         [HttpPost]
-        public IActionResult AddTask(Task response)
+        public IActionResult AddTask(Mission008_Team0107.Models.Task response)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +50,7 @@ namespace Mission008_Team0107.Controllers
             return View("Confirmation", response);
         }
 
-
+        //EDIT
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -59,18 +65,42 @@ namespace Mission008_Team0107.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Task updatedInfo)
+        public IActionResult Edit(Mission008_Team0107.Models.Task updatedInfo)
         {
             _repo.UpdateTask(updatedInfo);
 
             return RedirectToAction("QuadrantView");
         }
 
+        //DELETE
+
+        [HttpGet]
+        public IActionResult DeleteTask(int id)
+        {
+            var recordToDelete = _repo.Tasks
+                .Single(x => x.TaskId == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTask(Mission008_Team0107.Models.Task record)
+        {
+            _repo.DeleteTask(record);
+            //REturn to QuadrantView after deleting an task
+            return RedirectToAction("QuadrantView");
+        }
+
+
         //-----------------------------------------------QUADRANT---------------------------------------------
 
 
         public IActionResult SeeQuandrent()
         {
+            ViewBag.Tasks = _repo.Tasks
+            .OrderBy(x => x.TaskId)
+            .Where(x => x.Completed == false)
+            .ToList();
             return View();
         }
 
