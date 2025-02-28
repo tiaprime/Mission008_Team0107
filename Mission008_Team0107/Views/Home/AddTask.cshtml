@@ -1,5 +1,5 @@
 ﻿@using Mission008_Team0107.Models
-@* @* @model NewMovie *@
+@model TaskObj
 
 <h1>Add a New Task</h1>
 
@@ -13,12 +13,11 @@
     <label asp-for="DueDate">Due Date:</label>
     <input asp-for="DueDate"><br>
 
-    <select asp-for="QuadrantId" required>
-        <option value="">Select a Quadrant</option>
-        @foreach (Quadrant m in ViewBag.Quadrants)
-        {
-            <option value="@m.QuadrantId">@m.QuadrantName</option>
-
+    <select asp-for="QuadrantId" required> 
+        <option value="">Select a Quadrant</option> 
+         @foreach (Quadrant m in ViewBag.Quadrants) 
+         { 
+             <option value="@m.QuadrantId">@m.QuadrantName</option> 
         }
     </select>
 
@@ -30,6 +29,7 @@
 
         }
     </select>
+   
 
     <label asp-for="Completed">Completed:</label>
     <select asp-for="Completed">
