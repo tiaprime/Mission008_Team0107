@@ -6,7 +6,7 @@ namespace Mission008_Team0107.Controllers
 {
     public class HomeController : Controller
     {
-        private NewTaskContext _repo;
+        private TaskManagementContext _repo;
         public IActionResult Index()
         {
             return View();
