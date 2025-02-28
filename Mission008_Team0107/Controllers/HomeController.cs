@@ -1,6 +1,9 @@
 using System.Diagnostics;   
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission008_Team0107.Models;
+using static System.Net.Mime.MediaTypeNames;
+
 
 namespace Mission008_Team0107.Controllers
 {
@@ -21,6 +24,9 @@ namespace Mission008_Team0107.Controllers
 
 
         //-----------------------------------------------TASK-------------------------------------------------
+        
+        
+        //ADD
         [HttpGet]
         public IActionResult AddTask()
         {
@@ -44,7 +50,7 @@ namespace Mission008_Team0107.Controllers
             return View("Confirmation", response);
         }
 
-
+        //EDIT
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -65,6 +71,26 @@ namespace Mission008_Team0107.Controllers
 
             return RedirectToAction("QuadrantView");
         }
+
+        //DELETE
+
+        [HttpGet]
+        public IActionResult DeleteTask(int id)
+        {
+            var recordToDelete = _repo.Tasks
+                .Single(x => x.TaskId == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteTask(Task record)
+        {
+            _repo.DeleteTask(record);
+            //REturn to QuadrantView after deleting an task
+            return RedirectToAction("QuadrantView");
+        }
+
 
         //-----------------------------------------------QUADRANT---------------------------------------------
 
