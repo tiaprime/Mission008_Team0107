@@ -24,7 +24,7 @@ namespace Mission008_Team0107.Controllers
 
 
         //-----------------------------------------------TASK-------------------------------------------------
-        // added Mission008_Team0107.Models because of a douple nameing issure? maybe Task is a special word? 
+        // added Mission008_Team0107.Models because of a douple nameing issure? maybe TaskObj is a special word? 
 
         //ADD  0-- view tasks
         [HttpGet]
@@ -34,12 +34,12 @@ namespace Mission008_Team0107.Controllers
                 .OrderBy(x => x.TaskId)
                 .ToList();
 
-            return View("AddTask", new Mission008_Team0107.Models.Task());
+            return View("AddTask", new TaskObj());
         }
 
 
         [HttpPost]
-        public IActionResult AddTask(Mission008_Team0107.Models.Task response)
+        public IActionResult AddTask(TaskObj response)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Mission008_Team0107.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Mission008_Team0107.Models.Task updatedInfo)
+        public IActionResult Edit(TaskObj updatedInfo)
         {
             _repo.UpdateTask(updatedInfo);
 
@@ -84,7 +84,7 @@ namespace Mission008_Team0107.Controllers
         }
 
         [HttpPost]
-        public IActionResult DeleteTask(Mission008_Team0107.Models.Task record)
+        public IActionResult DeleteTask(TaskObj record)
         {
             _repo.DeleteTask(record);
             //REturn to QuadrantView after deleting an task
