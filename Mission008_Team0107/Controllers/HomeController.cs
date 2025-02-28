@@ -34,6 +34,10 @@ namespace Mission008_Team0107.Controllers
            .OrderBy(x => x.CategoryName)
            .ToList();
 
+            ViewBag.Quadrants = _repo.Quadrants
+                .OrderBy(x => x.QuadrantName)
+                .ToList();
+
             ViewBag.Tasks = _repo.Tasks
                 .OrderBy(x => x.TaskId)
                 .ToList();
@@ -64,6 +68,10 @@ namespace Mission008_Team0107.Controllers
             // populate category dropdown
             ViewBag.Categories = _repo.Categories
                 .OrderBy(x => x.CategoryName)
+                .ToList();
+
+            ViewBag.Quadrants = _repo.Quadrants
+                .OrderBy(x => x.QuadrantName)
                 .ToList();
 
             return View("AddTask", recordToEdit);
