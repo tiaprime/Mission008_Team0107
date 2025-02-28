@@ -8,4 +8,6 @@ public interface ITaskRepository
     public void AddTask(TaskObj task);
     public void UpdateTask(TaskObj task);
     public void DeleteTask(TaskObj task);
+    //MAttia added this
+    public List<TaskObj> GetTasksWithDetails();
 }

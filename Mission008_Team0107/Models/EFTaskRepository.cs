@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Mission008_Team0107.Models;
 
 public class EFTaskRepository : ITaskRepository
@@ -30,4 +32,15 @@ public class EFTaskRepository : ITaskRepository
         _context.Tasks.Remove(task);
         _context.SaveChanges();
     }
+
+    //MAttia added this, it prejoins the all the tables for later use
+    public List<TaskObj> GetTasksWithDetails()
+    {
+        return _context.Tasks
+            .Include(t => t.Category)
+            .Include(t => t.Quadrant)
+            .ToList();
+    }
+
+
 }
