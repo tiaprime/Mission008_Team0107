@@ -3,6 +3,7 @@
 *@
 @{
 }
+@model QuadrantsData
 
 <!DOCTYPE html>
 <html>
@@ -14,49 +15,89 @@
         <div class="row">
             <div class="col-md-6 border">
                 <!-- Quadrant 1 content -->
-                @if (ViewBag.Tasks != null)
-                {
-                    var tasks = ((IEnumerable<dynamic>)ViewBag.Tasks).Where(task => task.QuadrantId == 1);
-                    foreach (var task in tasks)
-                    {
-                        <p>@task.TaskName</p>
-                    }
-                }
+                <div>
+                    <h4>Quadrant I - Important / Urgent</h4>
+                    <table>
+                        <tbody>
+                            @foreach (var task in Model.QuadrantOne)
+                            {
+                                <tr>
+                                    <td>@task.TaskName</td>
+                                    <td>@task.DueDate</td>
+                                    <td>@task.Category.CategoryName</td>
+                                    <td>Completed?: <input type="checkbox" value="@task.Completed" /></td>
+									<td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId">Edit</a></td>
+									<td><a class="btn btn-info" asp-controller="Home" asp-action="Delete" asp-route-id="@task.TaskId">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-6 border">
                 <!-- Quadrant 2 content -->
-                @if (ViewBag.Tasks != null)
-                {
-                    var tasks = ((IEnumerable<dynamic>)ViewBag.Tasks).Where(task => task.QuadrantId == 2);
-                    foreach (var task in tasks)
-                    {
-                        <p>@task.TaskName</p>
-                    }
-                }
+                <div>
+                    <h4>Quadrant II - Important / Not Urgent</h4>
+                    <table>
+                        <tbody>
+                            @foreach (var task in Model.QuadrantOne)
+                            {
+                                <tr>
+                                    <td>@task.TaskName</td>
+                                    <td>@task.DueDate</td>
+                                    <td>@task.Category.CategoryName</td>
+                                    <td>Completed?: <input type="checkbox" value="@task.Completed" /></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId">Edit</a></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Delete" asp-route-id="@task.TaskId">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6 border">
                 <!-- Quadrant 3 content -->
-                @if (ViewBag.Tasks != null)
-                {
-                    var tasks = ((IEnumerable<dynamic>)ViewBag.Tasks).Where(task => task.QuadrantId == 3);
-                    foreach (var task in tasks)
-                    {
-                        <p>@task.TaskName</p>
-                    }
-                }
+                <div>
+                    <h4>Quadrant III - Not Important / Urgent</h4>
+                    <table>
+                        <tbody>
+                            @foreach (var task in Model.QuadrantOne)
+                            {
+                                <tr>
+                                    <td>@task.TaskName</td>
+                                    <td>@task.DueDate</td>
+                                    <td>@task.Category.CategoryName</td>
+                                    <td>Completed?: <input type="checkbox" value="@task.Completed" /></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId">Edit</a></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Delete" asp-route-id="@task.TaskId">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-6 border">
                 <!-- Quadrant 4 content -->
-                @if (ViewBag.Tasks != null)
-                {
-                    var tasks = ((IEnumerable<dynamic>)ViewBag.Tasks).Where(task => task.QuadrantId == 4);
-                    foreach (var task in tasks)
-                    {
-                        <p>@task.TaskName</p>
-                    }
-                }
+                <div>
+                    <h4>Quadrant IV - Not Important / Not Urgent</h4>
+                    <table>
+                        <tbody>
+                            @foreach (var task in Model.QuadrantOne)
+                            {
+                                <tr>
+                                    <td>@task.TaskName</td>
+                                    <td>@task.DueDate</td>
+                                    <td>@task.Category.CategoryName</td>
+                                    <td>Completed?: <input type="checkbox" value="@task.Completed" /></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Edit" asp-route-id="@task.TaskId">Edit</a></td>
+                                    <td><a class="btn btn-info" asp-controller="Home" asp-action="Delete" asp-route-id="@task.TaskId">Delete</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
