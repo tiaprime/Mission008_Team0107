@@ -30,8 +30,8 @@ namespace Mission008_Team0107.Controllers
         [HttpGet]
         public IActionResult AddTask()
         {
-            ViewBag.Categories = _repo.Categories
-                .OrderBy(x => x.CategoryName)
+            ViewBag.Tasks = _repo.Tasks
+                .OrderBy(x => x.TaskId)
                 .ToList();
 
             return View("AddTask", new Task());
@@ -97,6 +97,10 @@ namespace Mission008_Team0107.Controllers
 
         public IActionResult SeeQuandrent()
         {
+            ViewBag.Tasks = _repo.Tasks
+            .OrderBy(x => x.TaskId)
+            .Where(x => x.Completed == false)
+            .ToList();
             return View();
         }
 
