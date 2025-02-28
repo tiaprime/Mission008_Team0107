@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Diagnostics;   
 using Microsoft.AspNetCore.Mvc;
 using Mission008_Team0107.Models;
 
@@ -28,12 +28,12 @@ namespace Mission008_Team0107.Controllers
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
-            return View("AddTask", new NewTask());
+            return View("AddTask", new Task());
         }
 
 
         [HttpPost]
-        public IActionResult AddTask(NewTask response)
+        public IActionResult AddTask(Task response)
         {
             if (ModelState.IsValid)
             {
@@ -51,15 +51,15 @@ namespace Mission008_Team0107.Controllers
             var recordToEdit = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            ViewBag.Categories = _repo.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
+            //ViewBag.Categories = _repo.Categories
+            //    .OrderBy(x => x.CategoryName)
+            //    .ToList();
 
             return View("AddTask", recordToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(NewTask updatedInfo)
+        public IActionResult Edit(Task updatedInfo)
         {
             _repo.UpdateTask(updatedInfo);
 
