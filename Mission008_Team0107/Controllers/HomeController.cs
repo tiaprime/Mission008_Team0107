@@ -1,4 +1,4 @@
-using System.Diagnostics;
+using System.Diagnostics;   
 using Microsoft.AspNetCore.Mvc;
 using Mission008_Team0107.Models;
 
@@ -19,6 +19,8 @@ namespace Mission008_Team0107.Controllers
             return View();
         }
 
+
+        //-----------------------------------------------TASK-------------------------------------------------
         [HttpGet]
         public IActionResult AddTask()
         {
@@ -26,15 +28,18 @@ namespace Mission008_Team0107.Controllers
                 .OrderBy(x => x.CategoryName)
                 .ToList();
 
-            return View("AddTask", new NewTask());
-
+            return View("AddTask", new Task());
+        }
 
 
         [HttpPost]
-        public IActionResult AddTask(NewTask response)
+        public IActionResult AddTask(Task response)
         {
-            _repo.Tasks.Add(response);
-            _repo.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _repo.AddTask(response);
+            }
+
 
             return View("Confirmation", response);
         }
@@ -46,21 +51,34 @@ namespace Mission008_Team0107.Controllers
             var recordToEdit = _repo.Tasks
                 .Single(x => x.TaskId == id);
 
-            ViewBag.Categories = _repo.Categories
-                .OrderBy(x => x.CategoryName)
-                .ToList();
+            //ViewBag.Categories = _repo.Categories
+            //    .OrderBy(x => x.CategoryName)
+            //    .ToList();
 
             return View("AddTask", recordToEdit);
         }
 
         [HttpPost]
-        public IActionResult Edit(NewTask updatedInfo)
+        public IActionResult Edit(Task updatedInfo)
         {
-            _repo.Update(updatedInfo);
-            _repo.SaveChanges();
+            _repo.UpdateTask(updatedInfo);
 
             return RedirectToAction("QuadrantView");
         }
+
+        //-----------------------------------------------QUADRANT---------------------------------------------
+
+
+        public IActionResult SeeQuandrent()
+        {
+            return View();
+        }
+
+
+
+
+
+
 
 
     }
