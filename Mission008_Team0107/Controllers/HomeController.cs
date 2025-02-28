@@ -20,7 +20,7 @@ namespace Mission008_Team0107.Controllers
         }
 
 
-        //CADEN-----------------------------
+        //-----------------------------------------------TASK-------------------------------------------------
         [HttpGet]
         public IActionResult AddTask()
         {
@@ -65,6 +65,20 @@ namespace Mission008_Team0107.Controllers
 
             return RedirectToAction("QuadrantView");
         }
+
+        //-----------------------------------------------QUADRANT---------------------------------------------
+
+
+        public IActionResult SeeQuandrent()
+        {
+            return View();
+        }
+
+
+
+
+
+
 
 
     }
