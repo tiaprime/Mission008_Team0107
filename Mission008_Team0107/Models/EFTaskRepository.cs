@@ -1,5 +1,5 @@
-namespace Mission008_Team0107.Models
-{
+namespace Mission008_Team0107.Models;
+
     public class EFTaskRepository : ITaskRepository
     {
         private TaskManagementContext _context;
@@ -31,4 +31,3 @@ namespace Mission008_Team0107.Models
             _context.SaveChanges();
         }
     }
-}

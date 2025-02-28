@@ -1,5 +1,5 @@
-namespace Mission008_Team0107.Models
-{
+namespace Mission008_Team0107.Models;
+
     public interface ITaskRepository
     {
         List<Task> Tasks { get; }
@@ -9,4 +9,4 @@ namespace Mission008_Team0107.Models
         public void UpdateTask(Task task);
         public void DeleteTask(Task task);
     } 
-}
+

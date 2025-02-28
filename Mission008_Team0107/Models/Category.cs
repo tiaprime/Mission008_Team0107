@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Mission008_Team0107.Models
-{
+namespace Mission008_Team0107.Models;
+
     public class Category
     {
         [Key]
@@ -9,4 +9,3 @@ namespace Mission008_Team0107.Models
         [Required]
         public string CategoryName { get; set; }
     }
-}

@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mission008_Team0107.Models
-{
+namespace Mission008_Team0107.Models;
+
     public class Task
     {
         [Key]
@@ -19,4 +19,3 @@ namespace Mission008_Team0107.Models
         public bool? Completed { get; set; }
 
     }
-}
