@@ -6,12 +6,12 @@
 <form method="post">
 
     <input type="hidden" asp-for="TaskId" />
-
+    <br>
     <label asp-for="TaskName">Name (required):</label>
-    <input asp-for="TaskName" required><br>
+    <input asp-for="TaskName" required><br><br>
 
     <label asp-for="DueDate">Due Date:</label>
-    <input asp-for="DueDate"><br>
+    <input asp-for="DueDate"><br><br>
 
     <select asp-for="QuadrantId" required> 
         <option value="">Select a Quadrant</option> 
@@ -19,7 +19,7 @@
          { 
              <option value="@m.QuadrantId">@m.QuadrantName</option> 
         }
-    </select>
+    </select><br><br>
 
     <select asp-for="CategoryId" required>
         <option value="">Select a Category</option>
@@ -28,7 +28,7 @@
             <option value="@m.CategoryId">@m.CategoryName</option>
 
         }
-    </select>
+    </select><br><br>
    
 
     <label asp-for="Completed">Completed:</label>
@@ -36,7 +36,7 @@
         <option value="" disabled selected></option>
         <option value="true">Yes</option>
         <option value="false">No</option>
-    </select>
+    </select><br><br>
 
     <button type="submit">Submit Task</button>
 </form>
