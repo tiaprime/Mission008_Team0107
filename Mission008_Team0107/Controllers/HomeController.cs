@@ -49,13 +49,31 @@ namespace Mission008_Team0107.Controllers
         [HttpPost]
         public IActionResult AddTask(TaskObj response)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    _repo.AddTask(response);
+                
+            //}
+
+
+            //return View("Confirmation", response);
+
             if (ModelState.IsValid)
             {
                 _repo.AddTask(response);
+                return View("Confirmation", response);
             }
+            else
+            {
+                ViewBag.Categories = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                ViewBag.Quadrants = _repo.Quadrants
+                    .OrderBy(x => x.QuadrantName)
+                    .ToList();
 
-
-            return View("Confirmation", response);
+                return View("AddTask", response);
+            }
         }
 
         //EDIT
@@ -83,10 +101,23 @@ namespace Mission008_Team0107.Controllers
             if (ModelState.IsValid)
             {
                 _repo.UpdateTask(updatedInfo);
+                return RedirectToAction("Quadrants");
             }
-            
+            else {
+                ViewBag.Categories = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                ViewBag.Quadrants = _repo.Quadrants
+                    .OrderBy(x => x.QuadrantName)
+                    .ToList();
 
-            return RedirectToAction("QuadrantView");
+                //_repo.GetTasksWithDetails()
+
+                return View("AddTask",updatedInfo);
+            }
+
+
+
         }
 
         //DELETE
@@ -97,7 +128,7 @@ namespace Mission008_Team0107.Controllers
             var recordToDelete = _repo.Tasks
                 .Single(x => x.TaskId == id);
             
-            return View(recordToDelete);
+            return View("DeleteConf",recordToDelete);
         }
 
         [HttpPost]
@@ -105,7 +136,7 @@ namespace Mission008_Team0107.Controllers
         {
             _repo.DeleteTask(record);
             //REturn to QuadrantView after deleting an task
-            return RedirectToAction("QuadrantView");
+            return RedirectToAction("Quadrants");
         }
 
 
