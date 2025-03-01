@@ -49,14 +49,31 @@ namespace Mission008_Team0107.Controllers
         [HttpPost]
         public IActionResult AddTask(TaskObj response)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    _repo.AddTask(response);
+                
+            //}
+
+
+            //return View("Confirmation", response);
+
             if (ModelState.IsValid)
             {
                 _repo.AddTask(response);
-                
+                return View("Confirmation", response);
             }
+            else
+            {
+                ViewBag.Categories = _repo.Categories
+                    .OrderBy(x => x.CategoryName)
+                    .ToList();
+                ViewBag.Quadrants = _repo.Quadrants
+                    .OrderBy(x => x.QuadrantName)
+                    .ToList();
 
-
-            return View("Confirmation", response);
+                return View("AddTask", response);
+            }
         }
 
         //EDIT
