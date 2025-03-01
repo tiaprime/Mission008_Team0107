@@ -11,9 +11,10 @@ public class TaskObj
     public string TaskName { get; set; }
     public string? DueDate { get; set; }
     [ForeignKey("QuadrantId")]
-    public int QuadrantId { get; set; }
+
     [Required]
-    public Quadrant Quadrant { get; set; }
+    public int QuadrantId { get; set; }
+    public Quadrant? Quadrant { get; set; }
     [ForeignKey("CategoryId")]
     public int? CategoryId { get; set; }
     public Category? Category { get; set; }
